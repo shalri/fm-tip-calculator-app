@@ -1,41 +1,41 @@
 "use client";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export default function TipCalculator() {
-  const [bill, setBill] = useState(0);
-  const [tipPercentage, setTipPercentage] = useState(0);
-  const [numberOfPeople, setNumberOfPeople] = useState(null);
-  const [customTip, setCustomTip] = useState("");
-  const [tip, setTip] = useState(0);
-  const [total, setTotal] = useState(0);
+  const [bill, setBill] = useState<number>(0);
+  const [tipPercentage, setTipPercentage] = useState<number>(0);
+  const [numberOfPeople, setNumberOfPeople] = useState<number | null>(null);
+  const [customTip, setCustomTip] = useState<string | number>("");
+  const [tip, setTip] = useState<number>(0);
+  const [total, setTotal] = useState<number>(0);
 
-  useEffect(() => {
-    if (numberOfPeople !== null && numberOfPeople > 0) {
-      calculateTip();
-    }
-  }, [bill, tipPercentage, numberOfPeople]);
-
-  const calculateTip = () => {
-    if (numberOfPeople > 0) {
+  const calculateTip = useCallback(() => {
+    if (numberOfPeople && numberOfPeople > 0) {
       const tipAmount = (bill * (tipPercentage / 100)) / numberOfPeople;
       const totalAmount =
         (bill + bill * (tipPercentage / 100)) / numberOfPeople;
       setTip(tipAmount);
       setTotal(totalAmount);
     }
-  };
+  }, [bill, tipPercentage, numberOfPeople]);
 
-  const handleBillChange = (e) => {
+  useEffect(() => {
+    if (numberOfPeople !== null && numberOfPeople > 0) {
+      calculateTip();
+    }
+  }, [bill, tipPercentage, numberOfPeople, calculateTip]);
+
+  const handleBillChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setBill(parseFloat(e.target.value) || 0);
   };
 
-  const handleTipPercentageChange = (percentage) => {
+  const handleTipPercentageChange = (percentage: number) => {
     setTipPercentage(percentage);
     setCustomTip(""); // Reset custom tip if preset is chosen
   };
 
-  const handleCustomTipChange = (e) => {
+  const handleCustomTipChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const custom = parseFloat(e.target.value);
     if (isNaN(custom)) {
       setTipPercentage(0);
@@ -46,7 +46,9 @@ export default function TipCalculator() {
     }
   };
 
-  const handleNumberOfPeopleChange = (e) => {
+  const handleNumberOfPeopleChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     const numPeople = e.target.value;
     if (numPeople === "" || parseInt(numPeople) > 0) {
       setNumberOfPeople(numPeople === "" ? null : parseInt(numPeople));
@@ -121,7 +123,7 @@ export default function TipCalculator() {
               <input
                 type="text"
                 id="number-of-people"
-                value={numberOfPeople}
+                value={numberOfPeople || ""}
                 onChange={handleNumberOfPeopleChange}
                 className="rounded border"
               />
