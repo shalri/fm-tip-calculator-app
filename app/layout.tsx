@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Space_Mono } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const spacemono = Space_Mono({ subsets: ["latin"], weight: "700" });
 
 export const metadata: Metadata = {
-  title: "次に(tsugini) | FScode",
-  description: "A basic NextJS template for Frontend Mentor Challenges",
+  title: "Tip Calculator App  | FScode",
+  description:
+    "Solution for the Tip Calculator App challenge from Frontend Mentor",
 };
 
 export default function RootLayout({
@@ -16,7 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} flex min-h-screen flex-col`}>
+      <body
+        className={`${spacemono.className} grid min-h-dvh grid-cols-1 place-items-start bg-tc-light-grayish text-base`}
+      >
         {children}
       </body>
     </html>
