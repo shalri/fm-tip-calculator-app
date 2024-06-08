@@ -4,31 +4,20 @@
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  /* margin-left: 10px; */
   -webkit-appearance: none;
   margin: 0;
 }
 
-/* @layer base { */
-/*   input:focus, */
-/*   input:active { */
-/*     /* @apply ring-tc-strong-cyan ring-tc-strong-cyan; */
-/*     @apply border-2 border-tc-strong-cyan ring-red-100; */
-/*   } */
-/* } */
-
+.dollar-bg {
+  background: hsl(189, 41%, 97%) url("../public/images/icon-dollar.svg")
+    no-repeat left 16px center;
+}
+.person-bg {
+  background: hsl(189, 41%, 97%) url("../public/images/icon-person.svg")
+    no-repeat left 16px center;
+}
 @layer base {
   .input-tc {
-    @apply form-input h-12 rounded-lg border-2 border-tc-white bg-tc-very-light-grayish text-right text-base transition-all duration-300 focus:border-2 focus:border-tc-strong-cyan focus:ring-0 focus:ring-offset-0 active:border-2 active:ring-tc-strong-cyan;
+    @apply form-input h-[50px] rounded-lg border-2 border-tc-white bg-tc-very-light-grayish text-right text-base transition-all duration-300 focus:border-2 focus:border-tc-strong-cyan focus:ring-0 focus:ring-offset-0 active:border-2 active:ring-tc-strong-cyan;
   }
 }
-/* .form-input { */
-/*   @apply border-2 border-tc-white bg-tc-very-light-grayish ring-tc-white; */
-/* } */
-/* [type="number"] { */
-/*   @apply border-2 border-tc-white bg-tc-very-light-grayish ring-tc-white; */
-/* } */
-/* input:focus { */
-/*   /* @apply focus:ring-0 focus:ring-tc-strong-cyan focus:ring-offset-0; */
-/*   @apply border-2 border-tc-white bg-tc-very-light-grayish text-right focus:border-2 focus:border-tc-strong-cyan focus:ring-0 focus:ring-offset-0 active:border-2 active:ring-tc-strong-cyan; */
-/* } */
