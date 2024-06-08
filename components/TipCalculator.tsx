@@ -74,7 +74,7 @@ export default function TipCalculator() {
       <header className="flex h-[144px] items-center justify-center">
         <h1 className="relative flex h-[56px] w-[90px] items-center justify-center">
           <Image
-            src="/images/logo.svg"
+            src="./images/logo.svg"
             alt="Splitter Logo"
             fill
             loading="eager"
@@ -83,12 +83,12 @@ export default function TipCalculator() {
         </h1>
       </header>
       <div className="rounded-t-3xl bg-tc-white">
-        <section className="px-8 pt-10">
+        <section className="px-8 pt-8">
           <form onSubmit={(e) => e.preventDefault()}>
             <div className="flex flex-col">
               <label
                 htmlFor="bill"
-                className="mb-2 text-[1rem] text-tc-dark-grayish"
+                className="mb-1 text-[1rem] text-tc-dark-grayish"
               >
                 Bill
               </label>
@@ -103,7 +103,7 @@ export default function TipCalculator() {
                 id="bill"
               />
             </div>
-            <div className="mt-9 grid grid-cols-2 gap-4">
+            <div className="mt-8 grid grid-cols-2 gap-4">
               <label
                 htmlFor="tip"
                 className="col-span-2 text-[1rem] text-tc-dark-grayish"
@@ -138,7 +138,7 @@ export default function TipCalculator() {
             <div className="flex flex-col">
               <label
                 htmlFor="number-of-people"
-                className="mb-2 mt-9 text-[1rem] text-tc-dark-grayish"
+                className="mb-1 mt-7 text-[1rem] text-tc-dark-grayish"
               >
                 Number of People
               </label>
@@ -151,11 +151,11 @@ export default function TipCalculator() {
                 onChange={handleNumberOfPeopleChange}
                 className="person-bg input-tc px-4 text-tc-very-dark-cyan"
               />
-              {numberOfPeople === 0 && (
-                <span className="text-red-500">
-                  Number of people must be greater than zero
-                </span>
-              )}
+              {/* {numberOfPeople === 0 && ( */}
+              {/*   <span className="text-red-500"> */}
+              {/*     Number of people must be greater than zero */}
+              {/*   </span> */}
+              {/* )} */}
             </div>
           </form>
         </section>
