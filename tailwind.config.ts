@@ -10,6 +10,7 @@ const config: Config = {
     extend: {
       colors: {
         "tc-strong-cyan": "hsl(172, 67%, 45%)",
+        "tc-cyan": "hsl(173, 61%, 76%)",
         "tc-very-dark-cyan": "hsl(183, 100%, 15%)",
         "tc-dark-grayish": "hsl(186, 14%, 43%)",
         "tc-grayish-cyan": "hsl(184, 14%, 56%)",

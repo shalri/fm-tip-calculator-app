@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${spacemono.className} grid min-h-dvh grid-cols-1 place-items-start bg-tc-light-grayish text-base`}
+        className={`${spacemono.className} grid min-h-dvh grid-cols-1 place-items-start bg-tc-light-grayish text-base sm:place-items-center`}
       >
         {children}
       </body>

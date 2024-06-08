@@ -1,10 +1,10 @@
 "use client";
-import { cn } from "@/lib/utils";
+import { cn, showWarning } from "@/lib/utils";
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 
 export default function TipCalculator() {
-  const [bill, setBill] = useState<number | null>(0);
+  const [bill, setBill] = useState<number | null>(null);
   const [tipPercentage, setTipPercentage] = useState<number>(0);
   const [numberOfPeople, setNumberOfPeople] = useState<number>(0);
   const [customTip, setCustomTip] = useState<string | number>("");
@@ -12,7 +12,7 @@ export default function TipCalculator() {
   const [total, setTotal] = useState<number>(0);
 
   const calculateTip = useCallback(() => {
-    const billAmount = bill || 0;
+    const billAmount = bill ?? 0;
     if (numberOfPeople > 0) {
       const tipAmount = (billAmount * (tipPercentage / 100)) / numberOfPeople;
       const totalAmount =
@@ -60,6 +60,8 @@ export default function TipCalculator() {
     }
   };
 
+  const warning = showWarning(numberOfPeople, bill, tipPercentage, customTip);
+
   const reset = () => {
     setBill(0);
     setTipPercentage(0);
@@ -70,8 +72,8 @@ export default function TipCalculator() {
   };
 
   return (
-    <main className="mx-auto grid max-w-[630px] place-items-center">
-      <header className="flex h-[144px] items-center justify-center">
+    <main className="mx-auto grid max-w-[630px] place-items-center sm:max-w-[922px] sm:grid-cols-2">
+      <header className="flex h-[144px] items-center justify-center sm:col-span-3 sm:items-start">
         <h1 className="relative flex h-[56px] w-[90px] items-center justify-center">
           <Image
             src="./images/logo.svg"
@@ -82,8 +84,8 @@ export default function TipCalculator() {
           />
         </h1>
       </header>
-      <div className="rounded-t-3xl bg-tc-white">
-        <section className="px-8 pt-8">
+      <div className="rounded-t-3xl bg-tc-white sm:col-span-2 sm:grid sm:grid-cols-2 sm:items-center sm:gap-x-12 sm:rounded-b-3xl sm:pb-8">
+        <section className="px-8 pt-8 sm:pr-0">
           <form onSubmit={(e) => e.preventDefault()}>
             <div className="flex flex-col">
               <label
@@ -96,17 +98,17 @@ export default function TipCalculator() {
                 type="number"
                 step="0.01"
                 min="0"
-                value={bill || ""}
+                value={bill ?? ""}
                 placeholder="0.00"
                 onChange={handleBillChange}
                 className="input-tc dollar-bg px-4 text-tc-very-dark-cyan"
                 id="bill"
-              />
-            </div>
-            <div className="mt-8 grid grid-cols-2 gap-4">
+              />{" "}
+            </div>{" "}
+            <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3">
               <label
                 htmlFor="tip"
-                className="col-span-2 text-[1rem] text-tc-dark-grayish"
+                className="col-span-2 text-[1rem] text-tc-dark-grayish sm:col-span-3"
               >
                 Select Tip %
               </label>
@@ -119,8 +121,8 @@ export default function TipCalculator() {
                   className={cn(
                     "h-12 rounded-lg bg-tc-very-dark-cyan text-tc-white transition-colors duration-300",
                     tipPercentage === percentage
-                      ? "bg-tc-strong-cyan text-tc-very-dark-cyan"
-                      : "",
+                      ? "bg-tc-strong-cyan text-tc-very-dark-cyan "
+                      : "hover:bg-tc-cyan hover:text-tc-very-dark-cyan",
                   )}
                 >
                   {percentage}%
@@ -132,16 +134,23 @@ export default function TipCalculator() {
                 placeholder="Custom"
                 value={customTip}
                 onChange={handleCustomTipChange}
-                className="input-tc text-tc-very-dark-cyan"
+                className="input-tc text-tc-very-dark-cyan placeholder:text-center"
               />
             </div>
             <div className="flex flex-col">
-              <label
-                htmlFor="number-of-people"
-                className="mb-1 mt-7 text-[1rem] text-tc-dark-grayish"
-              >
-                Number of People
-              </label>
+              <div className="flex items-baseline justify-between">
+                <label
+                  htmlFor="number-of-people"
+                  className="mb-1 mt-7 text-[1rem] text-tc-dark-grayish"
+                >
+                  Number of People
+                </label>
+                {warning && (
+                  <p className="animate-pulse text-sm text-red-500">
+                    Can&apos;t be zero
+                  </p>
+                )}
+              </div>
               <input
                 type="number"
                 min="1"
@@ -149,24 +158,22 @@ export default function TipCalculator() {
                 value={numberOfPeople || ""}
                 placeholder="0"
                 onChange={handleNumberOfPeopleChange}
-                className="person-bg input-tc px-4 text-tc-very-dark-cyan"
+                className={cn(
+                  "person-bg input-tc px-4 text-tc-very-dark-cyan",
+                  warning ? "border-red-300" : "",
+                )}
               />
-              {/* {numberOfPeople === 0 && ( */}
-              {/*   <span className="text-red-500"> */}
-              {/*     Number of people must be greater than zero */}
-              {/*   </span> */}
-              {/* )} */}
             </div>
           </form>
         </section>
-        <section className="mb mx-6 my-8 rounded-2xl bg-tc-very-dark-cyan px-6 pb-6 pt-9">
-          <div className="mb-5">
+        <section className="mx-6 my-8 rounded-2xl bg-tc-very-dark-cyan px-6 pb-6 pt-9 sm:mb-0 sm:ml-0 sm:mr-8 sm:px-10 sm:py-10">
+          <div className="mb-5 sm:mb-6">
             <h2 className="flex w-full items-center justify-between">
               <div className="text-[1rem] text-tc-very-light-grayish">
                 Tip Amount
                 <p className="text-sm  text-tc-grayish-cyan">/ person</p>
               </div>
-              <div className="text-[2.10rem] text-tc-strong-cyan">
+              <div className="text-[2.10rem] text-tc-strong-cyan sm:text-[3rem]">
                 ${tip.toFixed(2)}
               </div>
             </h2>
@@ -177,14 +184,20 @@ export default function TipCalculator() {
                 Total
                 <p className="text-sm  text-tc-grayish-cyan">/ person</p>
               </div>
-              <div className="text-[2.10rem] text-tc-strong-cyan">
+              <div className="sm text-[2.10rem] text-tc-strong-cyan sm:text-[3rem]">
                 ${total.toFixed(2)}
               </div>
             </h2>
           </div>
           <button
             onClick={reset}
-            className="mt-8 h-[50px] w-full rounded-lg bg-tc-strong-cyan text-center text-[0.87em] uppercase text-tc-very-dark-cyan"
+            disabled={!tip && !total}
+            className={cn(
+              "mt-8 h-[50px] w-full rounded-[6px] bg-tc-strong-cyan/30 text-center text-[0.87em] uppercase text-tc-very-dark-cyan  transition-all duration-300 sm:mt-[120px]",
+              tip || total
+                ? "bg-tc-strong-cyan text-tc-very-dark-cyan hover:bg-tc-cyan"
+                : "",
+            )}
           >
             Reset
           </button>

@@ -7,7 +7,6 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-
 .dollar-bg {
   background: hsl(189, 41%, 97%) url("../public/images/icon-dollar.svg")
     no-repeat left 16px center;
@@ -18,6 +17,6 @@ input::-webkit-inner-spin-button {
 }
 @layer base {
   .input-tc {
-    @apply form-input h-[50px] rounded-lg border-2 border-tc-white bg-tc-very-light-grayish text-right text-base transition-all duration-300 focus:border-2 focus:border-tc-strong-cyan focus:ring-0 focus:ring-offset-0 active:border-2 active:ring-tc-strong-cyan;
+    @apply form-input h-[50px] rounded-lg border-2 border-tc-white bg-tc-very-light-grayish text-right text-base transition-all duration-300 hover:border-tc-cyan focus:border-2 focus:border-tc-strong-cyan focus:ring-0 focus:ring-offset-0 active:border-2 active:ring-tc-strong-cyan;
   }
 }
