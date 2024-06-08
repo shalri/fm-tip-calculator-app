@@ -115,7 +115,7 @@ export default function TipCalculator() {
               {[5, 10, 15, 25, 50].map((percentage) => (
                 <button
                   type="button"
-                  id="tip"
+                  id={`tip${percentage}`}
                   key={percentage}
                   onClick={() => handleTipPercentageChange(percentage)}
                   className={cn(

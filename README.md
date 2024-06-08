@@ -41,7 +41,7 @@ Implementing this challenge with NextJS made it more interesting. It gave me
 a broader scope for learning.
 
 I had so much fun with this challenge. It was challenging but well worth it. I am
-pleased on how I implemented the logic for the app. This really helped me
+pleased with how I implemented the logic for the app. This really helped me
 develop a deeper understanding of hooks.
 
 This challenge also showed the importance of a `.fig` file. I spent most of the time
